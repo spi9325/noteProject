@@ -93,7 +93,7 @@ exports.loginRoute.post("/signin", (req, res) => __awaiter(void 0, void 0, void 
                         maxAge: 30 * 24 * 60 * 60 * 1000,
                         httpOnly: true,
                         secure: false,
-                        sameSite: "lax"
+                        sameSite: "none"
                     }).json({
                         login: "success",
                     });
