@@ -50,7 +50,7 @@ exports.notesRoute.post("/create", tokenMiddeleware_1.tokenMiddleware, (req, res
         }
         else {
             res.status(400).json({
-                error: "Invalid Inputs"
+                error: parseData.error
             });
         }
     }
@@ -95,10 +95,11 @@ exports.notesRoute.patch("/update", tokenMiddeleware_1.tokenMiddleware, (req, re
     try {
         const id = req.userid;
         const parseData = types_1.notesType.safeParse(req.body);
-        if (!parseData) {
+        if (!parseData.success) {
             res.json({
-                error: "bad input"
+                error: parseData.error
             });
+            return;
         }
         const noteNo = (_a = parseData.data) === null || _a === void 0 ? void 0 : _a.noteNo;
         const { title, description } = parseData.data;
@@ -116,6 +117,7 @@ exports.notesRoute.patch("/update", tokenMiddeleware_1.tokenMiddleware, (req, re
                 if (updatedNote) {
                     res.status(200).json({
                         updatedNote,
+                        msg: "Note Updated successfully"
                     });
                 }
             }

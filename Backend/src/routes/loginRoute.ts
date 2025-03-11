@@ -12,9 +12,10 @@ const client = new PrismaClient();
 loginRoute.post("/signup",async (req,res)=>{
     try {
        const parseData = userTypes.safeParse(req.body);
+       
        if(!parseData.success){
            res.status(400).json({
-               error:"invalid input"
+               error:parseData.error
             })
        }else{
         const username=parseData.data?.username
@@ -41,7 +42,7 @@ loginRoute.post("/signup",async (req,res)=>{
          })
  
          res.status(200).json({
-             message:"user is created"
+             message:"SignUp success"
          })
         }
         else{
@@ -55,7 +56,7 @@ loginRoute.post("/signup",async (req,res)=>{
   
    } catch (error) {
     console.log(error);
-    res.status(500).json({ error: "Internal server error" });
+       
    }
 });
 
@@ -64,7 +65,7 @@ loginRoute.post("/signin",async(req:Request,res:Response)=>{
         const parseData = userTypes.safeParse(req.body);
         if(!parseData.success){
             res.status(400).json({
-                error:"invalid inputs"
+                error:parseData.error
             })
         }else{
             const email = parseData.data.email;
@@ -84,7 +85,7 @@ loginRoute.post("/signin",async(req:Request,res:Response)=>{
                         maxAge:30 * 24 * 60 * 60 * 1000,
                         httpOnly:true,
                         secure:false,
-                        sameSite:"none"
+                        sameSite:"lax"
                     }).json({
                         login:"success",
                     })

@@ -28,7 +28,7 @@ exports.loginRoute.post("/signup", (req, res) => __awaiter(void 0, void 0, void 
         const parseData = types_1.userTypes.safeParse(req.body);
         if (!parseData.success) {
             res.status(400).json({
-                error: "invalid input"
+                error: parseData.error
             });
         }
         else {
@@ -52,7 +52,7 @@ exports.loginRoute.post("/signup", (req, res) => __awaiter(void 0, void 0, void 
                     });
                 }));
                 res.status(200).json({
-                    message: "user is created"
+                    message: "SignUp success"
                 });
             }
             else {
@@ -64,7 +64,6 @@ exports.loginRoute.post("/signup", (req, res) => __awaiter(void 0, void 0, void 
     }
     catch (error) {
         console.log(error);
-        res.status(500).json({ error: "Internal server error" });
     }
 }));
 exports.loginRoute.post("/signin", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -72,7 +71,7 @@ exports.loginRoute.post("/signin", (req, res) => __awaiter(void 0, void 0, void 
         const parseData = types_1.userTypes.safeParse(req.body);
         if (!parseData.success) {
             res.status(400).json({
-                error: "invalid inputs"
+                error: parseData.error
             });
         }
         else {
@@ -93,7 +92,7 @@ exports.loginRoute.post("/signin", (req, res) => __awaiter(void 0, void 0, void 
                         maxAge: 30 * 24 * 60 * 60 * 1000,
                         httpOnly: true,
                         secure: false,
-                        sameSite: "none"
+                        sameSite: "lax"
                     }).json({
                         login: "success",
                     });

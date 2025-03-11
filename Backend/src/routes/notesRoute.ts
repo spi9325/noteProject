@@ -38,7 +38,7 @@ notesRoute.post("/create", tokenMiddleware, async (req: Request, res: Response) 
             }
         } else {
             res.status(400).json({
-                error: "Invalid Inputs"
+                error: parseData.error
             })
         }
 
@@ -83,10 +83,11 @@ notesRoute.patch("/update",tokenMiddleware,async(req,res)=>{
    try {
     const id = req.userid
     const parseData = notesType.safeParse(req.body);
-    if(!parseData){
+    if(!parseData.success){
         res.json({
-            error:"bad input"
+            error:parseData.error
         })
+        return
     }
     const noteNo = parseData.data?.noteNo
     const {title,description} = parseData.data!;
@@ -106,6 +107,7 @@ notesRoute.patch("/update",tokenMiddleware,async(req,res)=>{
                 if(updatedNote){
                     res.status(200).json({
                         updatedNote,
+                        msg:"Note Updated successfully"
                     })
                 }
             
