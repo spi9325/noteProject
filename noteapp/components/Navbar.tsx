@@ -12,7 +12,7 @@ gsap.registerPlugin(ScrollTrigger)
 
 export function Navbar(){
     const {authorized} =useMyContext();
-
+    console.log(authorized +"nav auth")
     const t1= gsap.timeline()
     function handelClick(){
         t1.play()

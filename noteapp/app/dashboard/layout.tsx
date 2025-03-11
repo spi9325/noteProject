@@ -4,6 +4,7 @@ import { TopSection } from "./components/TopSection";
 import { NotesContextProvider } from "../context/notesStore";
 import { MainDash } from "./components/MainDash";
 import { MyProvider } from "../context/store";
+import { ToastProvider } from "@/components/ToastProvider";
 
 
 export const metadata: Metadata = {
@@ -25,6 +26,7 @@ export default function RootLayout({
             <TopSection/>
             <MainDash/>
             {children}
+            <ToastProvider/>
             </MyProvider>
           </NotesContextProvider>
         

@@ -13,6 +13,7 @@ import { RxUpdate } from "react-icons/rx";
 import { NoteContainer } from "./NoteContainer";
 import { MainDashSkeleton } from "./MainDashSkeleton";
 import { MainSkeleton } from "./MainSkeleton";
+import { toast } from "react-toastify";
 
 
 interface notesType {
@@ -98,7 +99,16 @@ export function MainDash() {
             )
             
             if (res.status == 200) {
-                alert("updation success");
+                toast.success(res.data.msg, {
+                                    position: "top-center",
+                                    autoClose: 5000,
+                                    hideProgressBar: false,
+                                    closeOnClick: false,
+                                    pauseOnHover: true,
+                                    draggable: true,
+                                    progress: undefined,
+                                    theme: "light",
+                                    });
                 setNotes((prevNotes) =>
                     prevNotes.map(note =>
                         note.noteNo === control.noteNo

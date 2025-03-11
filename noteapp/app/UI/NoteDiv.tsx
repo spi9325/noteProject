@@ -14,7 +14,7 @@ export function NoteDiv({ title, description, buttonText, noteNo, updateFn }: pr
     const descriptionRef = useRef<HTMLTextAreaElement>(null)
     const [titleVal, setTitleVal] = useState(title ?? "");
     const [descriptionVal, setDescriptionVal] = useState(description ?? "");
-
+    console.log(titleRef.current?.value)
     useEffect(() => {
         setTitleVal(title ?? "");
         setDescriptionVal(description ?? "");
@@ -36,11 +36,12 @@ export function NoteDiv({ title, description, buttonText, noteNo, updateFn }: pr
 
             <div className="mt-[100px] md:mt-0 w-[80%] mx-auto flex flex-col  justify-center items-center">
                 <label className=" font-semibold">Title:</label>
-                <input ref={titleRef} value={titleVal} onChange={handelTitle} className="rounded p-1 w-[80%] outline-dashed bg-slate-200" type="text" required />
+                <input ref={titleRef} value={titleVal} required onChange={handelTitle} className="rounded p-1 w-[80%] outline-dashed bg-slate-200" type="text"  />
             </div>
             <div className=" w-[100%] mt-[20px] bg-black p-3 h-[auto] rounded-xl relative overflow-y-hidden">
                 <div className=" bg-white border rounded-xl w-[100%] pt-3 px-1">
                     <textarea
+                        required
                         value={descriptionVal}
                         onChange={handelDescription}
                         placeholder="Type your notes here..."

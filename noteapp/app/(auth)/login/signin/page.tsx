@@ -5,8 +5,10 @@ import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { toast } from "react-toastify";
 interface resultType {
     login?: string;
+    error:string;
 }
 
 export default function SignIn() {
@@ -34,10 +36,35 @@ export default function SignIn() {
                     withCredentials:true,
                 }
             )
-            setResult((prev) => ({ ...prev, login: true }))
+            if(response.status == 200){
+                setResult((prev) => ({ ...prev, login: true }))
+                toast.success('SignIn success.......', {
+                    position: "top-center",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: false,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                    });
+            }
 
-        } catch (error) {
-            console.log(error)
+        } catch (error:any) {
+            
+            const errors = error.response?.data?.error?.issues?.map((cur: any) => 
+                cur.message
+              );
+            toast.error(`${errors || error.response.data.error }`, {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: false,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                });
         }
 
     }, [])

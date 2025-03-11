@@ -1,10 +1,16 @@
 "use client"
 
 import axios from "axios";
-import { useRouter } from "next/navigation"
 import { useRef, useState } from "react"
+import { toast } from "react-toastify";
 
-export function NoteContainer() {
+
+interface resultType{
+    message?:string;
+    error?:string;
+}
+
+export function  NoteContainer() {
     const [note, setNote] = useState("");
     const [saveLoading, setSaveLoading] = useState(false);
     const title = useRef<HTMLInputElement>(null);
@@ -14,7 +20,7 @@ export function NoteContainer() {
     async function handelSubmit(){
         try {
             setSaveLoading(true);
-            const result = await axios.post(`${process.env.NEXT_PUBLIC_Backend_URL}/notes/create`,
+            const result = await axios.post<resultType>(`${process.env.NEXT_PUBLIC_Backend_URL}/notes/create`,
                 {
                     title:title.current?.value,
                     description:note
@@ -24,13 +30,33 @@ export function NoteContainer() {
                 }
             )
             if(result.status == 200){
-                alert("save successfully refresh page plz")
+                toast.success(`${result.data?.message}`, {
+                    position: "top-center",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: false,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                    });
                 setSaveLoading(false);
-            }else{
-                alert("somthing wrong")
             }
-        } catch (error) {
-            console.log(error);
+        } catch (error:any) {
+             const errors = error.response?.data?.error?.issues?.map((cur: any) => 
+                            cur.message
+                          );
+                        toast.error(`${errors || error.response.data.error }`, {
+                            position: "top-center",
+                            autoClose: 5000,
+                            hideProgressBar: false,
+                            closeOnClick: false,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                            theme: "light",
+                            });
+            setSaveLoading(false)
         }
     }
    
@@ -44,6 +70,7 @@ export function NoteContainer() {
         <div className=" w-[100%] mt-[20px] bg-black p-3 h-[auto] rounded-xl relative overflow-y-hidden md:backdrop-blur-[10px]">
             <div className=" bg-white border rounded-xl w-[100%] pt-3 px-1">
                 <textarea
+                    required
                     value={note}
                     onChange={(e) => handleChange(e)}
                     placeholder="Type your notes here..."

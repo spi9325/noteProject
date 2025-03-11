@@ -2,7 +2,9 @@
 import { CustomeButton } from "@/app/UI/CustomeButton";
 import axios from "axios";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useCallback, useRef, useState } from "react";
+import { toast } from "react-toastify";
 
 interface signUpResponce{
     message:string
@@ -14,6 +16,7 @@ export default function Signup() {
     const usernameRef = useRef<HTMLInputElement>(null);
     const emailRef    = useRef<HTMLInputElement>(null);
     const passwordRef = useRef<HTMLInputElement>(null)
+    const router = useRouter();
     const [data,setData] =useState<signUpResponce | null>(null)
     
  
@@ -37,9 +40,34 @@ export default function Signup() {
                     },
                 }
             );
-            setData(response.data)
-        } catch (error) {
-            console.log(error);
+            if(response.status == 200){
+                 toast.success('SignUp success.......', {
+                                    position: "top-center",
+                                    autoClose: 5000,
+                                    hideProgressBar: false,
+                                    closeOnClick: false,
+                                    pauseOnHover: true,
+                                    draggable: true,
+                                    progress: undefined,
+                                    theme: "light",
+                              });
+                setData(response.data);
+                router.push("/login/signin");
+            }
+        } catch (error:any) {
+           const errors= error.response.data.error.issues?.map((cur:any)=>{
+                return cur.message ;
+            })
+            toast.error(`${errors || error.response.data.error}`, {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: false,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                });
         }
        
      },[]);
