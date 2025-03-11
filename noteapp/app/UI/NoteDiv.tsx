@@ -6,6 +6,7 @@ interface propsType {
     noteNo?: number;
     buttonText?: string;
     updateFn?: (titleVal: string, descriptionVal: string,noteNo?:number) => void;
+    
 }
 
 
@@ -14,7 +15,7 @@ export function NoteDiv({ title, description, buttonText, noteNo, updateFn }: pr
     const descriptionRef = useRef<HTMLTextAreaElement>(null)
     const [titleVal, setTitleVal] = useState(title ?? "");
     const [descriptionVal, setDescriptionVal] = useState(description ?? "");
-    console.log(titleRef.current?.value)
+    
     useEffect(() => {
         setTitleVal(title ?? "");
         setDescriptionVal(description ?? "");

@@ -41,7 +41,19 @@ export default function Update({params}:{params:Promise<{noteNo:number}>}){
     async function updateFn(title:string,description:string){ 
                 
        try {
-        
+        if(title == note?.title && description == note?.description){
+            toast.warning(`you not change anythig why update`, {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: false,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                });
+                return
+        }
         setUpdateLoading(true)
          const res = await axios.patch<updateType>(`${process.env.NEXT_PUBLIC_Backend_URL}/notes/update`,
              {

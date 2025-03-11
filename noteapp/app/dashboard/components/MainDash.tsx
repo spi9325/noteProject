@@ -41,6 +41,10 @@ interface controlType {
     description?: string;
     noteNo?: number
 }
+interface delType{
+    message:string;
+    error:string;
+}
 export function MainDash() {
     const { authorized } = useMyContext();
     const [sidebar, setSidebar] = useState(false);
@@ -84,8 +88,24 @@ export function MainDash() {
         }
     }
     async function updateFn(title: string, description: string) {
-
+        
         try {
+            const note = notes.filter((cur)=>{
+                return cur.title.includes(title) && cur.description.includes(description)
+            })
+            if(title == note[0]?.title && description == note[0]?.description){
+                toast.warning(`nothing change why update`, {
+                    position: "top-center",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: false,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                    });
+                    return
+            }
             setUpdateLoading(true);
             const res = await axios.patch<updateType>(`${process.env.NEXT_PUBLIC_Backend_URL}/notes/update`,
                 {
@@ -126,13 +146,46 @@ export function MainDash() {
     }
     async function handelDelete(noteNo:number) {
         try {
-            const response = await axios.delete(`${process.env.NEXT_PUBLIC_Backend_URL}/notes/delete?noteNo=${noteNo}`,{withCredentials:true});
+            const response = await axios.delete<delType>(`${process.env.NEXT_PUBLIC_Backend_URL}/notes/delete?noteNo=${noteNo}`,{withCredentials:true});
 
             if (response.status === 200) {
+                toast.success(response.data?.message, {
+                    position: "top-center",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: false,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                    });
                 setNotes((prevNotes) => prevNotes.filter((note) => note.noteNo !== noteNo));
+            }else{
+                toast.error(`${response.data?.error}`, {
+                    position: "top-center",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: false,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                    });
             }
-        } catch (error) {
-            console.log(error);
+        } catch (error:any) {
+            const errors = error.response?.data?.error?.issues?.map((cur: any) => 
+                cur.message
+              );
+            toast.error(`${errors || error.response.data.error }`, {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: false,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                });
         }
     }
 
