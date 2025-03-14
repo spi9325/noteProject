@@ -21,14 +21,14 @@ export default function RootLayout({
     <html lang="en">
         <body >
         
-          <NotesContextProvider>
             <MyProvider>
+          <NotesContextProvider>
             <TopSection/>
             <MainDash/>
             {children}
             <ToastProvider/>
-            </MyProvider>
           </NotesContextProvider>
+            </MyProvider>
         
         </body>
     </html>
