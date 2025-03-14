@@ -60,9 +60,9 @@ export function Navbar(){
                 </div>
                 <div className="text-start  px-2 hidden sm:flex sm:gap-8">
                     <Link className="hover:shadow-lg hover:rounded-lg menus" href={"/"}>Home</Link>
-                    <Link className="hover:shadow-lg hover:rounded-lg menus" href={"/services"}>Services</Link>
-                    <Link className="hover:shadow-lg hover:rounded-lg menus" href={"manual"}>Manual</Link>
-                    <Link className="hover:shadow-lg hover:rounded-lg menus" href={"/about"}>About</Link>
+                    <Link className="hover:shadow-lg hover:rounded-lg menus" href={"/"}>Services</Link>
+                    <Link className="hover:shadow-lg hover:rounded-lg menus" href={"/"}>Manual</Link>
+                    <Link className="hover:shadow-lg hover:rounded-lg menus" href={"/"}>About</Link>
                     
                 </div>
                 

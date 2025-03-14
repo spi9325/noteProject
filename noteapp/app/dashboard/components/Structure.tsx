@@ -5,9 +5,11 @@ import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useEffect } from "react"
 import { MainSkeleton } from "./MainSkeleton"
+import { useMyContext } from "@/app/context/store"
 
 export function Structure() {
-    const { authorized, user } = useNotesContext();
+    const { user } = useNotesContext();
+    const { authorized } = useMyContext();
     const router = useRouter()
 
     useEffect(() => {

@@ -89,10 +89,11 @@ exports.loginRoute.post("/signin", (req, res) => __awaiter(void 0, void 0, void 
                         email: userExistOrNot.email
                     }, jwtSecret);
                     res.cookie("token", token, {
-                        maxAge: 30 * 24 * 60 * 60 * 1000,
                         httpOnly: true,
-                        secure: false,
-                        sameSite: "lax"
+                        secure: true,
+                        sameSite: "none",
+                        maxAge: 30 * 24 * 60 * 60 * 1000,
+                        path: "/"
                     }).json({
                         login: "success",
                     });
@@ -144,8 +145,8 @@ exports.loginRoute.get("/getuser", tokenMiddeleware_1.tokenMiddleware, (req, res
 exports.loginRoute.post("/logout", tokenMiddeleware_1.tokenMiddleware, (req, res) => {
     res.clearCookie("token", {
         httpOnly: true,
-        secure: false,
-        sameSite: "strict",
+        secure: true,
+        sameSite: "none",
     });
     res.status(200).send("Logout success");
 });

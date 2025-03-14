@@ -20,12 +20,9 @@ export default function RootLayout({
     <html lang="en">
         <body >
         
-          <NotesContextProvider>
-            <MyProvider>
+         
             {children}
-            <ToastProvider/>
-            </MyProvider>
-          </NotesContextProvider>
+          
         
         </body>
     </html>
