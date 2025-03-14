@@ -14,9 +14,11 @@ export function Structure() {
 
     useEffect(() => {
         if (!authorized) {
-            router.push("/login/signup")
-            return
-        }
+            new Promise<void>((resolve, reject) => {
+                setTimeout(() => {  resolve() }, 2000)
+            }).then(() =>   router.push("/login/signup"))
+        
+         }
     }, [authorized]);
 
     return (
@@ -24,7 +26,6 @@ export function Structure() {
             {
                 !authorized ? (<div className=""><MainSkeleton/></div>)
                     : (<div className="">
-                        
                         <div className="md:hidden border w-[100%] mt-[80px]">
                             <h1 className="shadow-xl text-[50px] sm:text-[70px] text-center text-red-500">Welcome <span className="text-green-400">{user}</span> your creation start here</h1>
                             <div className="w-full border mt-[70px] px-2 py-7 rounded-t-2xl shadow-xl">

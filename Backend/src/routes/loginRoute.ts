@@ -137,6 +137,7 @@ loginRoute.post("/logout",tokenMiddleware,(req:Request,res:Response)=>{
         httpOnly:true,
         secure:true,
         sameSite:"none",
+        path:"/"
     });
     res.status(200).send("Logout success")
 });
