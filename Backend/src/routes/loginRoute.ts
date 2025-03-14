@@ -31,7 +31,7 @@ loginRoute.post("/signup",async (req,res)=>{
         });
         
         if(!userExistOrNot){
-         const transaction = await client.$transaction(async (client)=>{
+         const transaction = await client.$transaction(async (client:any)=>{
              await client.user.create({
                 data:{
                  username,
