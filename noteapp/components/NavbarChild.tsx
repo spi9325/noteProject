@@ -7,13 +7,10 @@ import {ScrollTrigger} from "gsap/ScrollTrigger"
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap"
 import { useRecoilValue } from "recoil";
-import { loginAtom } from "@/app/store/Login/LoginAtom";
 gsap.registerPlugin(ScrollTrigger)
 
 export function NavbarChild(){
 
-    const result = useRecoilValue(loginAtom);
-      console.log(result.login);
 
     const t1= gsap.timeline()
     function handelClick(){
