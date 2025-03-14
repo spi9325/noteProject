@@ -108,8 +108,10 @@ loginRoute.post("/signin",async(req:Request,res:Response)=>{
 
 loginRoute.get("/authorized",(req:Request,res:Response)=>{
     const token = req.cookies.token;
+    console.log(token + "token")
    try {
      const authorized = jwt.verify(token,jwtSecret);
+     console.log("backend User Auth"+authorized)
      if(authorized){
          res.send(true)
      }else{

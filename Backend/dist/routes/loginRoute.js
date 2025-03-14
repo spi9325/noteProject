@@ -117,8 +117,10 @@ exports.loginRoute.post("/signin", (req, res) => __awaiter(void 0, void 0, void 
 }));
 exports.loginRoute.get("/authorized", (req, res) => {
     const token = req.cookies.token;
+    console.log(token + "token");
     try {
         const authorized = jsonwebtoken_1.default.verify(token, jwtSecret);
+        console.log("backend User Auth" + authorized);
         if (authorized) {
             res.send(true);
         }
@@ -147,6 +149,7 @@ exports.loginRoute.post("/logout", tokenMiddeleware_1.tokenMiddleware, (req, res
         httpOnly: true,
         secure: true,
         sameSite: "none",
+        path: "/"
     });
     res.status(200).send("Logout success");
 });
