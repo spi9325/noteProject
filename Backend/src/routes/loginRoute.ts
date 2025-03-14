@@ -82,10 +82,10 @@ loginRoute.post("/signin",async(req:Request,res:Response)=>{
                         email:userExistOrNot.email
                     },jwtSecret)
                     res.cookie("token",token,{
-                        maxAge:30 * 24 * 60 * 60 * 1000,
                         httpOnly:true,
-                        secure:false,
-                        sameSite:"lax"
+                        secure:true,
+                        sameSite:"none",
+                        maxAge:30 * 24 * 60 * 60 * 1000,
                     }).json({
                         login:"success",
                     })
@@ -134,8 +134,8 @@ loginRoute.get("/getuser",tokenMiddleware,(req,res)=>{
 loginRoute.post("/logout",tokenMiddleware,(req:Request,res:Response)=>{
     res.clearCookie("token",{
         httpOnly:true,
-        secure:false,
-        sameSite:"strict",
+        secure:true,
+        sameSite:"none",
     });
     res.status(200).send("Logout success")
 });
