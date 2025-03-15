@@ -11,7 +11,8 @@ export function Structure() {
     const { user } = useNotesContext();
     const { authorized } = useMyContext();
     const router = useRouter()
-
+    console.log("authorized structure page", authorized);
+    
     useEffect(() => {
         const timeout = setTimeout(()=>{
             if (!authorized) {
