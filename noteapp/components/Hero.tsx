@@ -6,10 +6,12 @@ import  {gsap} from "gsap"
 import {ScrollTrigger} from "gsap/ScrollTrigger"
 import { useRouter } from "next/navigation";
 import { useMyContext } from "@/app/context/store";
+import { useEffect } from "react";
+import axios from "axios";
 gsap.registerPlugin(ScrollTrigger)
 export function Hero(){
 const router = useRouter()
-const {authorized} = useMyContext()
+const {authorized,setAuthorized} = useMyContext()
     const mm = gsap.matchMedia()
         useGSAP(()=>{           
             gsap.from("#hero-heading",{
@@ -65,7 +67,14 @@ const {authorized} = useMyContext()
             })
          
         })
-
+        
+        useEffect(()=>{
+            async function validate(){
+                const res = await axios.get(`${process.env.NEXT_PUBLIC_Backend_URL}/login/authorized`,{withCredentials:true});
+                console.log(res.data + "data true")
+            }
+            validate();
+        },[])
         function gotoDashboard(){
             if(authorized){
                 router.push("/dashboard")
