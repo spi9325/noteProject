@@ -9,7 +9,7 @@ import { useMyContext } from "@/app/context/store"
 
 export function Structure() {
     const { user } = useNotesContext();
-    const { authorized } = useMyContext();
+    const { authorized } = useNotesContext();
     const router = useRouter()
     console.log("authorized structure page", authorized);
     
