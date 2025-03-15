@@ -43,7 +43,7 @@ export function Structure() {
     return (
         <div className="">
             {
-                !authorized ? (<div className=""><MainSkeleton/></div>)
+                authorized == false ? (<div className=""><MainSkeleton/></div>)
                     : (<div className="">
                         <div className="md:hidden border w-[100%] mt-[80px]">
                             <h1 className="shadow-xl text-[50px] sm:text-[70px] text-center text-red-500">Welcome <span className="text-green-400">{user}</span> your creation start here</h1>
