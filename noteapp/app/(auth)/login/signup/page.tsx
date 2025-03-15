@@ -17,7 +17,6 @@ export default function Signup() {
     const emailRef    = useRef<HTMLInputElement>(null);
     const passwordRef = useRef<HTMLInputElement>(null)
     const router = useRouter();
-    // const [data,setData] =useState<signUpResponce | null>(null)
     
  
 
