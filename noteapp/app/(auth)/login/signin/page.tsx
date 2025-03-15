@@ -16,7 +16,7 @@ export default function SignIn() {
     const emailRef = useRef<HTMLInputElement>(null);
     const passwordRef = useRef<HTMLInputElement>(null);
 
-    const { result, setResult } = useMyContext()
+    const { result, setResult ,setAuthorized} = useMyContext()
 
     const handelSignIn = useCallback(async () => {
         if (!emailRef.current?.value && !passwordRef.current?.value) {
@@ -38,6 +38,7 @@ export default function SignIn() {
             )
             if(response.status == 200){
                 setResult((prev) => ({ ...prev, login: true }))
+                setAuthorized(true);
                 toast.success('SignIn success.......', {
                     position: "top-center",
                     autoClose: 5000,

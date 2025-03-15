@@ -1,6 +1,5 @@
 "use client"
-import axios from "axios";
-import { createContext, Dispatch, ReactNode, SetStateAction, useContext, useEffect, useState } from "react";
+import { createContext, Dispatch, ReactNode, SetStateAction, useContext, useState } from "react";
 
 
 interface State {
