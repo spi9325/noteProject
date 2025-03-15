@@ -3,28 +3,30 @@
 import { useNotesContext } from "../../context/notesStore"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
-import { use, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { MainSkeleton } from "./MainSkeleton"
 import axios from "axios"
 
 export function Structure() {
     const { user } = useNotesContext();
     const [authorized,setAuthorized] = useState<boolean>(false);
+    const [loading,setLoading] = useState<boolean>(true);
     const router = useRouter();
     
     useEffect(() => {
         async function verifyUser(){
             try {
+                    
                     const res = await axios.get(`${process.env.NEXT_PUBLIC_Backend_URL}/user/authorized`,
                         {
                             withCredentials:true
                         }
                     )
                     if(res.data == true){
-                        console.log("res user is "+res.data)
                         setAuthorized(true)
+                        setLoading(false);
                     }else{
-                        setAuthorized(false);
+                        router.push("/login/signup");
                     }
                 
             } catch (error) {
@@ -32,19 +34,15 @@ export function Structure() {
             }}
             
             verifyUser()
-            if(authorized == false){
-                router.push("/login/signup")
-            }else{
-                router.push("/login/signin")
-            }
+            
     },[])
-   
+  
 
     return (
         <div className="">
             {
-                authorized == false ? (<div className=""><MainSkeleton/></div>)
-                    : (<div className="">
+                loading ? (<div className=""><MainSkeleton/></div>)
+                    :  authorized ? (<div className="">
                         <div className="md:hidden border w-[100%] mt-[80px]">
                             <h1 className="shadow-xl text-[50px] sm:text-[70px] text-center text-red-500">Welcome <span className="text-green-400">{user}</span> your creation start here</h1>
                             <div className="w-full border mt-[70px] px-2 py-7 rounded-t-2xl shadow-xl">
@@ -63,7 +61,7 @@ export function Structure() {
                         
                     </div>
                     
-                )
+                ) : null
 
             }
         </div>

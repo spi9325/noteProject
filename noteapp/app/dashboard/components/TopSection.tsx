@@ -1,7 +1,6 @@
 "use client"
 import { useNotesContext } from "@/app/context/notesStore";
 import Link from "next/link";
-import { useMemo } from "react";
 import { FaBars } from "react-icons/fa";
 import { HiOutlineDotsVertical } from "react-icons/hi";
 

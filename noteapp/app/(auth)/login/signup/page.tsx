@@ -17,7 +17,7 @@ export default function Signup() {
     const emailRef    = useRef<HTMLInputElement>(null);
     const passwordRef = useRef<HTMLInputElement>(null)
     const router = useRouter();
-    const [data,setData] =useState<signUpResponce | null>(null)
+    // const [data,setData] =useState<signUpResponce | null>(null)
     
  
 
@@ -51,7 +51,6 @@ export default function Signup() {
                                     progress: undefined,
                                     theme: "light",
                               });
-                setData(response.data);
                 router.push("/login/signin");
             }
         } catch (error:any) {

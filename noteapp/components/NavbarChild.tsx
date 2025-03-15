@@ -6,7 +6,6 @@ import { HiBars3 } from "react-icons/hi2";
 import {ScrollTrigger} from "gsap/ScrollTrigger"
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap"
-import { useRecoilValue } from "recoil";
 gsap.registerPlugin(ScrollTrigger)
 
 export function NavbarChild(){
@@ -20,7 +19,6 @@ export function NavbarChild(){
         t1.reverse()
     }
 
-    // gsap start
        useGSAP(()=>{
             gsap.from(".logo",{
                 y:-100,
@@ -53,7 +51,6 @@ export function NavbarChild(){
             t1.pause(); 
        }) 
       
-    // gsap end
     return (
     <div className="z-50 bg-transparent rounded-lg backdrop-blur-[10px] max-w-[1152px] mx-auto flex justify-between items-center gap-6 fixed top-0 left-0 right-0">
                 <div className=" px-3 logo">
@@ -76,18 +73,14 @@ export function NavbarChild(){
                     </div>
                 </div>
 
-                
                          <div id="mobile-menu" className=" absolute top-12 right-[-90%] bg-black text-white flex flex-col p-3 w-[250px] justify-center items-center gap-4 rounded-lg ">
                                 <p onClick={()=>hidediv()} className="absolute top-0 right-0 px-2 rounded mr-5 mt-1 font-medium text-black bg-green-300 cursor-pointer">X</p>
                                 <Link id="mobile-menu-text" className="mt-3 rounded-lg outline-none tracking-widest transition-shadow duration-100 hover:shadow-white px-10 " href={"/"}>Home</Link>
-                                <Link id="mobile-menu-text" className="tracking-widest rounded-lg transition-shadow duration-100 hover:shadow-white px-10 barsmenus" href={"/services"}>Services</Link>
-                                <Link id="mobile-menu-text" className="tracking-widest rounded-lg transition-shadow duration-100 hover:shadow-white px-10 barsmenus" href={"/manuals"}>Manual</Link>
-                                <Link id="mobile-menu-text" className="tracking-widest rounded-lg transition-shadow duration-100 hover:shadow-white px-10 barsmenus" href={"/about"}>About</Link>
+                                <Link id="mobile-menu-text" className="tracking-widest rounded-lg transition-shadow duration-100 hover:shadow-white px-10 barsmenus" href={"/"}>Services</Link>
+                                <Link id="mobile-menu-text" className="tracking-widest rounded-lg transition-shadow duration-100 hover:shadow-white px-10 barsmenus" href={"/"}>Manual</Link>
+                                <Link id="mobile-menu-text" className="tracking-widest rounded-lg transition-shadow duration-100 hover:shadow-white px-10 barsmenus" href={"/"}>About</Link>
                             </div>
 
-                    
-                    
-                
     </div>
     )
 }

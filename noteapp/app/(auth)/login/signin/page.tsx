@@ -1,5 +1,4 @@
 "use client"
-import { useMyContext } from "@/app/context/store";
 import { CustomeButton } from "@/app/UI/CustomeButton";
 import axios from "axios";
 import Link from "next/link";
@@ -15,8 +14,8 @@ export default function SignIn() {
     const router = useRouter();
     const emailRef = useRef<HTMLInputElement>(null);
     const passwordRef = useRef<HTMLInputElement>(null);
+    const [result,setResult] = useState(false);
 
-    const { result, setResult ,setAuthorized} = useMyContext()
 
     const handelSignIn = useCallback(async () => {
         if (!emailRef.current?.value && !passwordRef.current?.value) {
@@ -37,8 +36,7 @@ export default function SignIn() {
                 }
             )
             if(response.status == 200){
-                setResult((prev) => ({ ...prev, login: true }))
-                setAuthorized(true);
+                setResult(true);
                 toast.success('SignIn success.......', {
                     position: "top-center",
                     autoClose: 5000,
@@ -72,11 +70,11 @@ export default function SignIn() {
 
 
     useEffect(() => {
-        if (result.login == true) {
+        if (result == true) {
             router.push("/")
         }
 
-    }, [result.login])
+    }, [result])
 
     return (
 
@@ -105,7 +103,7 @@ export default function SignIn() {
                     </div>
                     <Link href={'/login/signup'}><p className="text-center mt-5 text-[20px] rounded bg-slate-200">close</p></Link>
                     {
-                        result.login ? (<div className="w-[20%] text-green-400 bg-black text-center mx-auto mt-6 rounded-xl">{result.login}</div>) : ""
+                        result ? (<div className="w-[20%] text-green-400 bg-black text-center mx-auto mt-6 rounded-xl">{result}</div>) : ""
                     }
                 </div>
             </div>

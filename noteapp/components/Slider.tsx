@@ -5,7 +5,6 @@ import { gsap } from "gsap"
 import Link from "next/link";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useRouter } from "next/navigation";
-import { useMyContext } from "@/app/context/store";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -21,7 +20,6 @@ export function Slider() {
     const router = useRouter();
     let mm = gsap.matchMedia();
 
-    const {authorized} = useMyContext();
     const testomonial: testimonialType[] = [
         {
             name: "baburao",
@@ -116,21 +114,14 @@ export function Slider() {
 
     })
    
-    function gotoDashboard(){
-        if(authorized){
-            router.push("/dashboard");
-        }else{
-            router.push("/login/signup")
-        }
-    }
-
+    
 
 
     return (
         <div className="w-[100%] p-1 mt-[100px]">
             <div className="flex justify-center items-center flex-col gap-9">
                 <p className="text-4xl">Ready To Create?</p>
-                <div onClick={gotoDashboard}>
+                <div>
                  <Link id="bouncing" href={"/user/dashboard"}><CustomeButton text="Get Started" textSize="text-[22px]" width="w-[150px] lg:w-[200px]" textColor="text-green-200" height="h-[50px]"/></Link>
                 </div>
             </div>

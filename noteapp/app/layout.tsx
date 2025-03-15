@@ -1,10 +1,5 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { NotesContextProvider } from "./context/notesStore";
-import { MyProvider } from "./context/store";
-import { ToastProvider } from "@/components/ToastProvider";
-
-
 
 export const metadata: Metadata = {
   title: "NoteVault",
@@ -18,10 +13,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-        <body >
-         <MyProvider>
+        <body>
             {children}
-         </MyProvider>
         </body>
     </html>
   );

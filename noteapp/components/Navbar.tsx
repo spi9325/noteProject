@@ -1,4 +1,3 @@
-
 "use client"
 import Link from "next/link";
 import { CustomeButton } from "../app/UI/CustomeButton";
@@ -6,12 +5,13 @@ import { HiBars3 } from "react-icons/hi2";
 import {ScrollTrigger} from "gsap/ScrollTrigger"
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap"
-import { useMyContext } from "@/app/context/store";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 gsap.registerPlugin(ScrollTrigger)
 
 export function Navbar(){
-    const {authorized} =useMyContext();
+    const [authorized,setAuthorized] =useState(false);
     const t1= gsap.timeline()
     function handelClick(){
         t1.play()
@@ -20,7 +20,7 @@ export function Navbar(){
         t1.reverse()
     }
 
-    // gsap start
+    
        useGSAP(()=>{
             gsap.from(".logo",{
                 y:-100,
@@ -51,7 +51,16 @@ export function Navbar(){
             
             t1.pause(); 
        }) 
-    // gsap end
+       useEffect(()=>{
+        async function validate(){
+            const res = await axios.get(`${process.env.NEXT_PUBLIC_Backend_URL}/user/authorized`,{withCredentials:true});
+            console.log(res.data + "data true")
+            if(res.data === true){
+                setAuthorized(true);
+            }
+        }
+        validate();
+    },[])
     return (
     <div className="z-50 bg-transparent rounded-lg backdrop-blur-[10px] max-w-[1152px] mx-auto flex justify-between items-center gap-6 fixed top-0 left-0 right-0">
                 <div className=" px-3 logo">

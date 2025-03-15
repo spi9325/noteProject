@@ -8,6 +8,8 @@ export async function tokenMiddleware(req: Request, res: Response, next: NextFun
         // const authToken = req.headers['authorization']!
         const authToken = req.cookies.token
         const token = jwt.verify(authToken, JWT_SECRET) as JwtPayload
+        //   so this middelware run lots of time but i call this db so db call is high and increase charge so thi s is not applicable 
+        //   if possible then meke diffrent rout okkkkkkkkkkkkkkk or cache result
         const users = await client.user.findFirst({
             where:{
                 email:token.email

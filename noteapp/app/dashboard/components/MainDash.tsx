@@ -1,5 +1,4 @@
 "use client"
-import { useMyContext } from "@/app/context/store";
 import { CustomeButton } from "@/app/UI/CustomeButton";
 import { NoteDiv } from "@/app/UI/NoteDiv";
 import axios from "axios";
@@ -45,8 +44,9 @@ interface delType{
     message:string;
     error:string;
 }
+
 export function MainDash() {
-    const { authorized } = useMyContext();
+    const [authorized,setAuthorized] = useState(false);
     const [sidebar, setSidebar] = useState(false);
     const [loading, setLoading] = useState(true);
     const [updateLoading, setUpdateLoading] = useState(false);
@@ -54,7 +54,20 @@ export function MainDash() {
     const [notes, setNotes] = useState<notesType[]>([])
     const [search, setSearch] = useState<string>("");
     const [debouncedSearch, setDebouncedSearch] = useState<string>("");
-
+    
+    useEffect(()=>{
+      async function validate(){
+        try {
+            const res =await axios.get(`${process.env.NEXT_PUBLIC_Backend_URL}/user/authorized`,{withCredentials:true});
+            if(res.data === true){
+                setAuthorized(true);
+            }
+          } catch (error) {
+           console.log(error);
+          }
+      }
+      validate();
+    },[])
 
     function handleSearch(e: React.ChangeEvent<HTMLInputElement>) {
         setSearch(e.target.value);
