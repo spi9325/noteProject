@@ -111,7 +111,7 @@ loginRoute.get("/authorized",(req:Request,res:Response)=>{
     console.log(token + "token")
    try {
      const authorized = jwt.verify(token,jwtSecret);
-     console.log("backend User Auth"+authorized)
+     console.log("backend User Auth"+authorized + typeof authorized)
      if(authorized){
          res.send(true)
      }else{
