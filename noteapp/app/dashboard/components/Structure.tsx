@@ -13,12 +13,13 @@ export function Structure() {
     const router = useRouter()
 
     useEffect(() => {
-        if (!authorized) {
-            new Promise<void>((resolve, reject) => {
-                setTimeout(() => {  resolve() }, 2000)
-            }).then(() =>   router.push("/login/signup"))
-        
-         }
+        const timeout = setTimeout(()=>{
+            if (!authorized) {
+                router.push("/login/signin")
+             }
+        },5000);
+
+        ()=>clearTimeout(timeout);
     }, [authorized]);
 
     return (
