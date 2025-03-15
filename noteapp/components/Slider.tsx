@@ -122,7 +122,7 @@ export function Slider() {
             <div className="flex justify-center items-center flex-col gap-9">
                 <p className="text-4xl">Ready To Create?</p>
                 <div>
-                 <Link id="bouncing" href={"/user/dashboard"}><CustomeButton text="Get Started" textSize="text-[22px]" width="w-[150px] lg:w-[200px]" textColor="text-green-200" height="h-[50px]"/></Link>
+                 <Link id="bouncing" href={"/dashboard"}><CustomeButton text="Get Started" textSize="text-[22px]" width="w-[150px] lg:w-[200px]" textColor="text-green-200" height="h-[50px]"/></Link>
                 </div>
             </div>
             
