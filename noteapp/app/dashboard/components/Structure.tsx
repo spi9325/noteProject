@@ -3,26 +3,42 @@
 import { useNotesContext } from "../../context/notesStore"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
-import { useEffect } from "react"
+import { use, useEffect, useState } from "react"
 import { MainSkeleton } from "./MainSkeleton"
 import { useMyContext } from "@/app/context/store"
 
 export function Structure() {
     const { user } = useNotesContext();
-    const { authorized } = useNotesContext();
+    const [authorized,setAuthorized] = useState<boolean>(false);
     const router = useRouter()
-    console.log("authorized structure page", authorized);
     
     useEffect(() => {
-        const timeout = setTimeout(()=>{
-            if (!authorized) {
+        async function verifyUser(){
+            try {
+                    const res = await axios.get(`${process.env.NEXT_PUBLIC_Backend_URL}/user/authorized`,
+                        {
+                            withCredentials:true
+                        }
+                    )
+                    if(res.data == true){
+                        console.log("res user is "+res.data)
+                        setAuthorized(true)
+                    }else{
+                        setAuthorized(false);
+                    }
+                
+            } catch (error) {
+                console.log(error);
+            }}
+            
+            verifyUser()
+            if(authorized == false){
+                router.push("/login/signup")
+            }else{
                 router.push("/login/signin")
-             }
-        },5000);
-    console.log("authorized structure page after 5000", authorized);
-
-        ()=>clearTimeout(timeout);
-    }, [authorized]);
+            }
+    },[])
+   
 
     return (
         <div className="">
