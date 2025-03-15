@@ -5,6 +5,7 @@ import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { use, useEffect, useState } from "react"
 import { MainSkeleton } from "./MainSkeleton"
+import axios from "axios"
 
 export function Structure() {
     const { user } = useNotesContext();
