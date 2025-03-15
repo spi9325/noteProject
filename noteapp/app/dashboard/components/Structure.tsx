@@ -19,6 +19,7 @@ export function Structure() {
                 router.push("/login/signin")
              }
         },5000);
+    console.log("authorized structure page after 5000", authorized);
 
         ()=>clearTimeout(timeout);
     }, [authorized]);
