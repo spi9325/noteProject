@@ -5,12 +5,11 @@ import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { use, useEffect, useState } from "react"
 import { MainSkeleton } from "./MainSkeleton"
-import { useMyContext } from "@/app/context/store"
 
 export function Structure() {
     const { user } = useNotesContext();
     const [authorized,setAuthorized] = useState<boolean>(false);
-    const router = useRouter()
+    const router = useRouter();
     
     useEffect(() => {
         async function verifyUser(){
