@@ -23,6 +23,8 @@ function tokenMiddleware(req, res, next) {
             // const authToken = req.headers['authorization']!
             const authToken = req.cookies.token;
             const token = jsonwebtoken_1.default.verify(authToken, JWT_SECRET);
+            //   so this middelware run lots of time but i call this db so db call is high and increase charge so thi s is not applicable 
+            //   if possible then meke diffrent rout okkkkkkkkkkkkkkk or cache result
             const users = yield client.user.findFirst({
                 where: {
                     email: token.email

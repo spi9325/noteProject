@@ -90,8 +90,8 @@ exports.loginRoute.post("/signin", (req, res) => __awaiter(void 0, void 0, void 
                     }, jwtSecret);
                     res.cookie("token", token, {
                         httpOnly: true,
-                        secure: true,
-                        sameSite: "none",
+                        secure: false,
+                        sameSite: "lax",
                         maxAge: 30 * 24 * 60 * 60 * 1000,
                         path: "/"
                     }).json({
@@ -117,10 +117,8 @@ exports.loginRoute.post("/signin", (req, res) => __awaiter(void 0, void 0, void 
 }));
 exports.loginRoute.get("/authorized", (req, res) => {
     const token = req.cookies.token;
-    console.log(token + "token");
     try {
         const authorized = jsonwebtoken_1.default.verify(token, jwtSecret);
-        console.log("backend User Auth" + authorized);
         if (authorized) {
             res.send(true);
         }
@@ -147,8 +145,8 @@ exports.loginRoute.get("/getuser", tokenMiddeleware_1.tokenMiddleware, (req, res
 exports.loginRoute.post("/logout", tokenMiddeleware_1.tokenMiddleware, (req, res) => {
     res.clearCookie("token", {
         httpOnly: true,
-        secure: true,
-        sameSite: "none",
+        secure: false,
+        sameSite: "lax",
         path: "/"
     });
     res.status(200).send("Logout success");
