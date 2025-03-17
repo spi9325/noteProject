@@ -1,7 +1,7 @@
 "use client"
 
 import axios from "axios";
-import { useRef, useState } from "react"
+import { Dispatch, SetStateAction, useRef, useState } from "react"
 import { toast } from "react-toastify";
 
 
@@ -10,10 +10,12 @@ interface resultType{
     error?:string;
 }
 
+
 export function  NoteContainer() {
     const [note, setNote] = useState("");
     const [saveLoading, setSaveLoading] = useState(false);
     const title = useRef<HTMLInputElement>(null);
+
     function handleChange(e: React.ChangeEvent<HTMLTextAreaElement>) {
         setNote(e.target.value)
     }
@@ -40,6 +42,7 @@ export function  NoteContainer() {
                     progress: undefined,
                     theme: "light",
                     });
+                    
                 setSaveLoading(false);
             }
         } catch (error:any) {

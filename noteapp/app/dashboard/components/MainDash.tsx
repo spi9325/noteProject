@@ -210,6 +210,7 @@ export function MainDash() {
     }
     function handelCreateClose() {
         setControl((prev) => ({ ...prev, create: false }))
+        window.location.reload();
     }
 
     useEffect(() => {
@@ -375,7 +376,7 @@ export function MainDash() {
                                         <button onClick={handelCreateClose} className="bg-black px-2 text-white rounded ">close</button>
                                     </div>
                                     <div className="backdrop-blur-[10px]">
-                                        <NoteContainer />
+                                        <NoteContainer/>
                                     </div>
                                 </div>
                                 ) : null

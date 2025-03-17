@@ -14,7 +14,7 @@ export function Cards(){
         {name:"Creating Notes",img:"create.png" ,bg:"bg-white",color:"bg-green-300"},
         {name:"modify Notes",img:"modify.png" ,bg:"bg-green-200",color:"bg-red-500"},
         {name:"view Notes",img:"view.png" ,bg:"bg-green-200",color:"bg-red-500"},
-        {name:"shareing Notes",img:"share.png" ,bg:"bg-white",color:"bg-green-300"},
+        {name:"Share Notes",img:"share.png" ,bg:"bg-white",color:"bg-green-300"},
     ]
     return(
         <div className=" p-1 grid md:grid-cols-2 items-center gap-4 lg:gap-6 mt-[90px]  md:mt-[200px]">
