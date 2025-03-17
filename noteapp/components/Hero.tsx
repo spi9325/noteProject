@@ -77,12 +77,12 @@ const router = useRouter()
         }
        
     return (
-       <div className=" w-full h-full md:mt-9">
+       <div className="w-full h-full md:mt-9">
         <div className="text-center md:mt-[50px]">
-            <h1 id="hero-heading"  className="  text-5xl font-[Comfortaa] md:text-7xl leading-[55px] sm:leading-[60px]"> Save Your Notes With NoteVault</h1>
+            <h1 id="hero-heading" className="text-5xl font-[Comfortaa] md:text-7xl leading-[55px] sm:leading-[60px]"> Save Your Notes With NoteVault</h1>
         </div>
         <div  className="text-center p-4">
-            <h4  className="text-2xl ">create and modify your notes easily & <span className="text-purple-600 font-serif">Secure</span></h4>
+            <h4  className="text-2xl">create and modify your notes easily & <span className="text-purple-600 font-serif">Secure</span></h4>
         </div>
         <div className="flex justify-center p-5 ">
             <Link className="" onClick={gotoDashboard} id="bouncing" href={"/dashboard"}><CustomeButton text="Get Started" textSize="text-[22px]" width="w-[150px] lg:w-[200px]" textColor="text-green-200" height="h-[50px]"/></Link>
