@@ -9,7 +9,7 @@ import { tokenMiddleware } from "../middlewares/tokenMiddeleware";
 export const loginRoute = router();
 const client = new PrismaClient();
 
-loginRoute.post("/signup",async (req,res)=>{
+loginRoute.post("/signup",async (req:Request,res:Response)=>{
     try {
        const parseData = userTypes.safeParse(req.body);
        
@@ -120,7 +120,7 @@ loginRoute.get("/authorized",(req:Request,res:Response)=>{
    }
 });
 
-loginRoute.get("/getuser",tokenMiddleware,(req,res)=>{
+loginRoute.get("/getuser",tokenMiddleware,(req:Request,res:Response)=>{
     try {
         const username = req.username;
         res.status(200).send(username);

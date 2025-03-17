@@ -17,7 +17,7 @@ notesRoute.post("/create", tokenMiddleware, async (req: Request, res: Response) 
                 }
             })
             if (userExistOrNot) {
-                const success = await client.$transaction(async (client) => {
+                const success = await client.$transaction(async (client:any) => {
                     const note = await client.notes.create({
                         data: {
                             title,
@@ -47,7 +47,7 @@ notesRoute.post("/create", tokenMiddleware, async (req: Request, res: Response) 
     }
 })
 
-notesRoute.get("/all",tokenMiddleware,async(req,res)=>{
+notesRoute.get("/all",tokenMiddleware,async(req: Request, res: Response)=>{
    try {
     const email = req.email;
     const userExistOrNot = await client.user.findFirst({
@@ -79,7 +79,7 @@ notesRoute.get("/all",tokenMiddleware,async(req,res)=>{
    }
 })
 
-notesRoute.patch("/update",tokenMiddleware,async(req,res)=>{
+notesRoute.patch("/update",tokenMiddleware,async(req: Request, res: Response)=>{
    try {
     const id = req.userid
     const parseData = notesType.safeParse(req.body);
@@ -123,7 +123,7 @@ notesRoute.patch("/update",tokenMiddleware,async(req,res)=>{
    }
 })
 
-notesRoute.delete("/delete",tokenMiddleware,async(req,res)=>{
+notesRoute.delete("/delete",tokenMiddleware,async(req: Request, res: Response)=>{
     try{
         const id = req.userid;
         const noteNo = Number(req.query.noteNo);
@@ -136,7 +136,7 @@ notesRoute.delete("/delete",tokenMiddleware,async(req,res)=>{
         }
         if(id){
           
-            const transaction = await client.$transaction(async(client)=>{
+            const transaction = await client.$transaction(async(client:any)=>{
                 const deletedNote = await client.notes.delete({
                     where:{
                         noteNo,
@@ -159,7 +159,7 @@ notesRoute.delete("/delete",tokenMiddleware,async(req,res)=>{
     }   
 })
 
-notesRoute.post("/view",tokenMiddleware,async(req,res)=>{
+notesRoute.post("/view",tokenMiddleware,async(req: Request, res: Response)=>{
     try {
         const noteNo = Number(req.query.noteNo);
         const userId = Number(req.userid);
