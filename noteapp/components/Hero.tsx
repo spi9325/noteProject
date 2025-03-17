@@ -84,9 +84,9 @@ const router = useRouter()
         <div  className="text-center p-4">
             <h4  className="text-2xl ">create and modify your notes easily & <span className="text-purple-600 font-serif">Secure</span></h4>
         </div>
-        
-            <Link className="flex justify-center p-5" onClick={gotoDashboard} id="bouncing" href={"/dashboard"}><CustomeButton text="Get Started" textSize="text-[22px]" width="w-[150px] lg:w-[200px]" textColor="text-green-200" height="h-[50px]"/></Link>
-     
+        <div className="flex justify-center p-5 ">
+            <Link className="" onClick={gotoDashboard} id="bouncing" href={"/dashboard"}><CustomeButton text="Get Started" textSize="text-[22px]" width="w-[150px] lg:w-[200px]" textColor="text-green-200" height="h-[50px]"/></Link>
+        </div> 
         <p className="text-center text-[18px]">Unlimited | Free Access</p>
        </div>
     )
