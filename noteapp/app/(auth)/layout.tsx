@@ -17,8 +17,10 @@ export default function RootLayout({
   return (
     <html lang="en">
         <body >
-          {children}
-          <ToastProvider />
+         <div>
+         {children}
+         <ToastProvider />
+         </div>
         </body>
     </html>
   );

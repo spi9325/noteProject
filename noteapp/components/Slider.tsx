@@ -22,28 +22,28 @@ export function Slider() {
 
     const testomonial: testimonialType[] = [
         {
-            name: "baburao",
+            name: "Ben ",
             bg: "bg-green-200",
             profile: "B",
-            review: "this is greate website to save noted and access "
+            review: "NoteVault is a game-changer! It keeps my notes organized and easily accessible."
         },
         {
             name: "shyam",
             bg: "bg-red-200",
             profile: 'S',
-            review: "my team use this website for saving articles"
+            review: " The seamless experience makes productivity effortless!"
         },
         {
-            name: "raju",
+            name: "Ryan",
             bg: "bg-green-200",
             profile: "R",
-            review: "i am ITUS qualified,i use this for chating securly"
+            review: "I manage my notes! It's fast, reliable, and perfect for staying organized on the go"
         },
         {
             name: "unknown",
             bg: "bg-red-200",
             profile: "K",
-            review: "i use this for feedback for my customers"
+            review: "The intuitive design and smooth experience help me stay productive every day."
         }
 
 

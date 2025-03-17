@@ -61,7 +61,6 @@ export function Navbar(){
        useEffect(()=>{
         async function validate(){
             const res = await axios.get(`${process.env.NEXT_PUBLIC_Backend_URL}/user/authorized`,{withCredentials:true});
-            console.log(res.data + "data true")
            setAuthorized(res.data === true)
         }
         validate();
@@ -99,9 +98,6 @@ export function Navbar(){
                                 <Link id="mobile-menu-text" className=" tracking-widest rounded-lg transition-shadow duration-100 hover:shadow-white px-10 barsmenus" href={"/manuals"}>Manual</Link>
                                 <Link id="mobile-menu-text" className=" tracking-widest rounded-lg transition-shadow duration-100 hover:shadow-white px-10 barsmenus" href={"/about"}>About</Link>
                             </div>
-
-                    
-                    
                 
     </div>
     )
